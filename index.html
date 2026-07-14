@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSkills - Master Cybersecurity & Python Programming</title>
+    <meta name="description" content="Learn practical cybersecurity skills with structured learning, hands-on labs, and real-world examples. Master Python programming and become industry-ready.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230F172A' width='100' height='100'/><path fill='%233B82F6' d='M50 20 L70 40 L70 80 L30 80 L30 40 Z M50 50 L50 70' stroke='%238B5CF6' stroke-width='2' fill='none'/></svg>">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
+    
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Dark mode base */
+        :root {
+            --color-bg: #0F172A;
+            --color-surface: #1a2744;
+            --color-primary: #3B82F6;
+            --color-accent: #8B5CF6;
+            --color-text: #FFFFFF;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .particle {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.5), transparent);
+            animation: float 6s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.5; }
+            50% { transform: translateY(-20px) translateX(10px); opacity: 0.8; }
+        }
+
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(26, 39, 68, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glowing effect */
+        .glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar sticky */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        /* Smooth animations */
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stagger animation */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+
+        /* Hover effects */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Button styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #3B82F6;
+            padding: 12px 32px;
+            border: 2px solid #3B82F6;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Gradient background */
+        .gradient-bg {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+        }
+
+        /* Icon styles */
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+            border-radius: 8px;
+            color: #3B82F6;
+        }
+
+        /* Scroll reveal */
+        .scroll-hidden {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .scroll-reveal {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+
+        /* Copy button */
+        .copy-btn {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        /* Grid layout */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        /* Hero animation */
+        .hero-content {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Section spacing */
+        section {
+            padding: 80px 20px;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 20px;
+            }
+        }
+
+        /* Responsive text sizes */
+        h1 { font-size: clamp(32px, 8vw, 56px); }
+        h2 { font-size: clamp(28px, 6vw, 44px); }
+        h3 { font-size: clamp(18px, 4vw, 24px); }
+
+        /* Loading animation for hero */
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.5); }
+        }
+
+        /* Blog card */
+        .blog-card {
+            background: linear-gradient(145deg, rgba(26, 39, 68, 0.9), rgba(15, 23, 42, 0.95));
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        .blog-card-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border-radius: 10px;
+            background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            transition: all 0.25s ease;
+        }
+
+        .blog-card-item:hover {
+            background: rgba(59, 130, 246, 0.12);
+            border-color: rgba(59, 130, 246, 0.25);
+            transform: translateX(4px);
+        }
+
+        .blog-card-item .emoji {
+            font-size: 1.5rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+    <!-- Animated Background Particles -->
+    <div id="particle-container" class="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <nav class="relative z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-bold gradient-text">LearnSkills</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-300 hover:text-blue-400 transition">About</a>
+                    <a href="#courses" class="text-gray-300 hover:text-blue-400 transition">Learn</a>
+                    <a href="#features" class="text-gray-300 hover:text-blue-400 transition">Features</a>
+                    <a href="#research" class="text-gray-300 hover:text-blue-400 transition">Research</a>
+                    <a href="#why" class="text-gray-300 hover:text-blue-400 transition">Why Us</a>
+                    <a href="#contact" class="text-gray-300 hover:text-blue-400 transition">Contact</a>
+                </div>
+
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2">
+                <a href="#about" class="block text-gray-300 hover:text-blue-400 py-2">About</a>
+                <a href="#courses" class="block text-gray-300 hover:text-blue-400 py-2">Learn</a>
+                <a href="#features" class="block text-gray-300 hover:text-blue-400 py-2">Features</a>
+                <a href="#research" class="block text-gray-300 hover:text-blue-400 py-2">Research</a>
+                <a href="#why" class="block text-gray-300 hover:text-blue-400 py-2">Why Us</a>
+                <a href="#contact" class="block text-gray-300 hover:text-blue-400 py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative pt-20 pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="hero-content">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                        Learn Python & <span class="gradient-text">Cybersecurity</span> the Right Way
+                    </h1>
+                    <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+                        Master practical cybersecurity skills with structured learning, hands-on labs, real-world examples, and step-by-step roadmaps. Whether you're a beginner or looking to strengthen your knowledge, LearnSkills helps you build industry-ready skills.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="btn-primary inline-block text-center">Contact</a>
+                        <a href="#about" class="btn-secondary inline-block text-center">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="w-full h-96 rounded-2xl glass pulse-glow flex items-center justify-center">
+                        <svg class="w-32 h-32 text-blue-400 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="gradient-bg relative py-20 md:py-32">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center scroll-hidden">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">About LearnSkills</h2>
+            <div class="glass p-8 md:p-12 rounded-2xl">
+                <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                    LearnSkills is an independent learning platform dedicated to making cybersecurity education simple, practical, and accessible.
+                </p>
+                <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                    Our mission is to help students build real-world technical skills through structured learning, practical demonstrations, and hands-on labs.
+                </p>
+                <p class="text-gray-300 text-lg leading-relaxed">
+                    Whether you want to become a <span class="text-blue-400 font-semibold">SOC Analyst</span>, <span class="text-blue-400 font-semibold">Penetration Tester</span>, <span class="text-blue-400 font-semibold">Security Researcher</span>, <span class="text-blue-400 font-semibold">Security Engineer</span>, or <span class="text-blue-400 font-semibold">Bug Bounty Hunter</span>, LearnSkills provides a clear roadmap to help you achieve your goals.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What You'll Learn Section -->
+    <section id="courses" class="relative py-20 md:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center scroll-hidden">What You'll Learn</h2>
+            
+            <div class="feature-grid">
+                <!-- Python Programming -->
+                <div class="glass p-6 md:p-8 rounded-2xl card-hover scroll-hidden fade-in-up stagger-1">
+                    <div class="icon-box mb-4">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Python Programming</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>Fundamentals & Variables</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>Functions & OOP</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>Automation & Modules</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>Cybersecurity Focus</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>Practical Projects</li>
+                    </ul>
+                </div>
+
+                <!-- Cybersecurity Foundations -->
+                <div class="glass p-6 md:p-8 rounded-2xl card-hover scroll-hidden fade-in-up stagger-2">
+                    <div class="icon-box mb-4">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Cybersecurity Foundations</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>Networking Fundamentals</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>Linux & Operating Systems</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>Web & HTTP Protocols</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>TCP/IP & DNS</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>Ports & Protocols</li>
+                    </ul>
+                </div>
+
+                <!-- Web Security -->
+                <div class="glass p-6 md:p-8 rounded-2xl card-hover scroll-hidden fade-in-up stagger-3">
+                    <div class="icon-box mb-4">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Web Security</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>OWASP Top 10</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>SQL Injection & XSS</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>IDOR & CSRF</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>File Upload Vulnerabilities</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>API Security</li>
+                    </ul>
+                </div>
+
+                <!-- Security Tools -->
+                <div class="glass p-6 md:p-8 rounded-2xl card-hover scroll-hidden fade-in-up stagger-4">
+                    <div class="icon-box mb-4">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Security Tools</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>Burp Suite & Nmap</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>Wireshark & Gobuster</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>FFUF & Nikto</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>Directory Scanning</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>Hands-on Practice</li>
+                    </ul>
+                </div>
+
+                <!-- Blue Team -->
+                <div class="glass p-6 md:p-8 rounded-2xl card-hover scroll-hidden fade-in-up stagger-5">
+                    <div class="icon-box mb-4">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Blue Team & Defense</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>SOC Fundamentals</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>SIEM & Log Analysis</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>Incident Response</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>Threat Intelligence</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>Risk Assessment</li>
+                    </ul>
+                </div>
+
+                <!-- Practical Learning -->
+                <div class="glass p-6 md:p-8 rounded-2xl card-hover scroll-hidden fade-in-up stagger-1">
+                    <div class="icon-box mb-4">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Practical Learning</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>Vulnerability Assessment</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>Secure Coding Practices</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>Bug Bounty Basics</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>Hands-on Labs</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>CTF Preparation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What You'll Get Section -->
+    <section id="features" class="gradient-bg relative py-20 md:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center scroll-hidden">What You'll Get</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass p-6 rounded-xl card-hover scroll-hidden fade-in-up stagger-1">
+                    <div class="flex items-center mb-4">
+                        <div class="icon-box mr-4">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.3A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Beginner-Friendly Notes</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Clear, structured notes designed for learners starting from scratch.</p>
+                </div>
+
+                <div class="glass p-6 rounded-xl card-hover scroll-hidden fade-in-up stagger-2">
+                    <div class="flex items-center mb-4">
+                        <div class="icon-box mr-4">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10.5 1.5H19a1 1 0 011 1v15a1 1 0 01-1 1h-9.5m0-17v17m0-17H1a1 1 0 00-1 1v15a1 1 0 001 1h9.5"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Practical Labs</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Hands-on lab environments to practice real security scenarios.</p>
+                </div>
+
+                <div class="glass p-6 rounded-xl card-hover scroll-hidden fade-in-up stagger-3">
+                    <div class="flex items-center mb-4">
+                        <div class="icon-box mr-4">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.669 0-3.218-.51-4.5-1.385A7.954 7.954 0 009 4.804z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Roadmaps</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Step-by-step learning paths to guide your cybersecurity journey.</p>
+                </div>
+
+                <div class="glass p-6 rounded-xl card-hover scroll-hidden fade-in-up stagger-4">
+                    <div class="flex items-center mb-4">
+                        <div class="icon-box mr-4">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M7 3a1 1 0 000 2h6a1 1 0 000-2H7zM4 7a1 1 0 011-1h10a1 1 0 011 1v10a2 2 0 01-2 2H6a2 2 0 01-2-2V7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Cheat Sheets</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Quick reference guides for essential concepts and tools.</p>
+                </div>
+
+                <div class="glass p-6 rounded-xl card-hover scroll-hidden fade-in-up stagger-5">
+                    <div class="flex items-center mb-4">
+                        <div class="icon-box mr-4">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 12a1 1 0 110-2h6a1 1 0 110 2H9z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">PDF Notes</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Downloadable PDFs for offline learning and reference.</p>
+                </div>
+
+                <div class="glass p-6 rounded-xl card-hover scroll-hidden fade-in-up stagger-1">
+                    <div class="flex items-center mb-4">
+                        <div class="icon-box mr-4">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M8.5 3.5a.5.5 0 11-1 0 .5.5 0 011 0zm7 4a.5.5 0 11-1 0 .5.5 0 011 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Practice Questions</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Comprehensive question sets to test your knowledge.</p>
+                </div>
+
+                <div class="glass p-6 rounded-xl card-hover scroll-hidden fade-in-up stagger-2">
+                    <div class="flex items-center mb-4">
+                        <div class="icon-box mr-4">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Career Guidance</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Expert advice on cybersecurity career paths and opportunities.</p>
+                </div>
+
+                <div class="glass p-6 rounded-xl card-hover scroll-hidden fade-in-up stagger-3">
+                    <div class="flex items-center mb-4">
+                        <div class="icon-box mr-4">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v2h8v-2zM2 8a2 2 0 11-4 0 2 2 0 014 0zM5 15a4 4 0 00-8 0v2h8v-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Interview Preparation</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Get ready for cybersecurity job interviews with expert tips.</p>
+                </div>
+
+                <div class="glass p-6 rounded-xl card-hover scroll-hidden fade-in-up stagger-4">
+                    <div class="flex items-center mb-4">
+                        <div class="icon-box mr-4">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10.5 1.5H19a1 1 0 011 1v15a1 1 0 01-1 1h-9.5m0-17v17m0-17H1a1 1 0 00-1 1v15a1 1 0 001 1h9.5"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Real-World Projects</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Build portfolio projects that showcase your skills.</p>
+                </div>
+
+                <div class="glass p-6 rounded-xl card-hover scroll-hidden fade-in-up stagger-5">
+                    <div class="flex items-center mb-4">
+                        <div class="icon-box mr-4">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Continuous Learning</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Regular updates and new content to keep you current.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research & Articles Section -->
+    <section id="research" class="relative py-20 md:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="scroll-hidden">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Cybersecurity Research & <span class="gradient-text">Learning Resources</span></h2>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                        Cybersecurity is constantly evolving. To help learners stay updated, LearnSkills provides research-based articles, practical tutorials, career guidance, Python programming resources, and cybersecurity learning content.
+                    </p>
+                    <p class="text-gray-400 mb-4 font-medium">Explore our latest articles on:</p>
+                    <ul class="grid sm:grid-cols-2 gap-2 text-gray-400 text-sm mb-8">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 flex-shrink-0"></span>Cybersecurity Fundamentals</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 flex-shrink-0"></span>Python Programming</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 flex-shrink-0"></span>Ethical Hacking Concepts</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 flex-shrink-0"></span>OWASP Top 10</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 flex-shrink-0"></span>Web Application Security</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 flex-shrink-0"></span>Networking</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 flex-shrink-0"></span>Linux</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 flex-shrink-0"></span>Bug Bounty</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 flex-shrink-0"></span>SOC Analyst Learning</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 flex-shrink-0"></span>Security Tools</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 flex-shrink-0"></span>Career Roadmaps</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2 flex-shrink-0"></span>Practical Tutorials</li>
+                        <li class="flex items-center sm:col-span-2"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 flex-shrink-0"></span>Hands-on Learning</li>
+                    </ul>
+                    <a href="https://learnskillshub.blogspot.com/" target="_blank" rel="noopener noreferrer" class="btn-primary inline-flex items-center gap-2">
+                        Read Research Articles
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="blog-card p-6 md:p-8 card-hover scroll-hidden fade-in-up stagger-2">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-blue-500/20">
+                        <div class="icon-box">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">LearnSkills Blog</h3>
+                            <p class="text-gray-400 text-sm">Research, tutorials & guides</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="blog-card-item">
+                            <span class="emoji">📖</span>
+                            <span class="text-gray-200 font-medium">Research Articles</span>
+                        </div>
+                        <div class="blog-card-item">
+                            <span class="emoji">💻</span>
+                            <span class="text-gray-200 font-medium">Practical Tutorials</span>
+                        </div>
+                        <div class="blog-card-item">
+                            <span class="emoji">🛡️</span>
+                            <span class="text-gray-200 font-medium">Cybersecurity Guides</span>
+                        </div>
+                        <div class="blog-card-item">
+                            <span class="emoji">🐍</span>
+                            <span class="text-gray-200 font-medium">Python Learning</span>
+                        </div>
+                        <div class="blog-card-item">
+                            <span class="emoji">🚀</span>
+                            <span class="text-gray-200 font-medium">Career Roadmaps</span>
+                        </div>
+                    </div>
+                    <a href="https://learnskillshub.blogspot.com/" target="_blank" rel="noopener noreferrer" class="mt-6 block text-center text-sm text-blue-400 hover:text-purple-400 transition font-medium">
+                        Visit learnskillshub.blogspot.com →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose LearnSkills Section -->
+    <section id="why" class="relative py-20 md:py-32">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center scroll-hidden">Why Choose LearnSkills</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="flex items-start space-x-4 scroll-hidden fade-in-up stagger-1">
+                    <div class="flex-shrink-0 mt-1">
+                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-1">Beginner Friendly</h3>
+                        <p class="text-gray-400">Start from basics, no prior experience required</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4 scroll-hidden fade-in-up stagger-2">
+                    <div class="flex-shrink-0 mt-1">
+                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-1">Practical Learning</h3>
+                        <p class="text-gray-400">Learn by doing, not just reading theory</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4 scroll-hidden fade-in-up stagger-3">
+                    <div class="flex-shrink-0 mt-1">
+                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-1">Hands-on Approach</h3>
+                        <p class="text-gray-400">Master concepts through real-world labs and projects</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4 scroll-hidden fade-in-up stagger-4">
+                    <div class="flex-shrink-0 mt-1">
+                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-1">Industry Relevant Content</h3>
+                        <p class="text-gray-400">Skills that matter in today's cybersecurity landscape</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4 scroll-hidden fade-in-up stagger-5">
+                    <div class="flex-shrink-0 mt-1">
+                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-1">Step-by-Step Roadmaps</h3>
+                        <p class="text-gray-400">Clear paths from beginner to expert level</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4 scroll-hidden fade-in-up stagger-1">
+                    <div class="flex-shrink-0 mt-1">
+                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-1">Real-World Examples</h3>
+                        <p class="text-gray-400">Learn from actual security scenarios and case studies</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4 scroll-hidden fade-in-up stagger-2">
+                    <div class="flex-shrink-0 mt-1">
+                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-1">Self-Paced Learning</h3>
+                        <p class="text-gray-400">Learn at your own speed, anytime, anywhere</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4 scroll-hidden fade-in-up stagger-3">
+                    <div class="flex-shrink-0 mt-1">
+                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-1">Career-Oriented Guidance</h3>
+                        <p class="text-gray-400">Navigate your path to a successful security career</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4 scroll-hidden fade-in-up stagger-4">
+                    <div class="flex-shrink-0 mt-1">
+                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-1">Regular Content Updates</h3>
+                        <p class="text-gray-400">Stay current with the latest security trends and tools</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="gradient-bg relative py-20 md:py-32">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center scroll-hidden">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's Connect</h2>
+            <p class="text-gray-300 text-lg mb-12">
+                Have questions, feedback, or collaboration ideas? Feel free to reach out anytime.
+            </p>
+            
+            <div class="glass p-8 md:p-12 rounded-2xl">
+                <div class="flex items-center justify-center mb-8">
+                    <svg class="w-12 h-12 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                
+                <p class="text-xl text-white mb-8 font-semibold">redmark223@gmail.com</p>
+                
+                <button onclick="copyEmail()" class="copy-btn">
+                    Copy Email
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 bg-slate-900/50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold gradient-text">LearnSkills</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Learn • Practice • Build • Secure</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#about" class="hover:text-blue-400 transition">About</a></li>
+                        <li><a href="#courses" class="hover:text-blue-400 transition">Courses</a></li>
+                        <li><a href="#research" class="hover:text-blue-400 transition">Research</a></li>
+                        <li><a href="#contact" class="hover:text-blue-400 transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Research Blog</h4>
+                    <p class="text-gray-400 text-sm mb-3">
+                        Read the latest cybersecurity articles, tutorials, and research published by LearnSkills.
+                    </p>
+                    <a href="https://learnskillshub.blogspot.com/" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-purple-400 transition text-sm break-all">
+                        learnskillshub.blogspot.com
+                    </a>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <p class="text-gray-400 text-sm">Email: redmark223@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <p class="text-gray-400 text-center text-sm mb-4">
+                    Empowering the next generation of Python programmers and cybersecurity professionals through practical, hands-on learning.
+                </p>
+                <p class="text-gray-500 text-center text-xs">© 2026 LearnSkills. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize particles
+        function createParticles() {
+            const container = document.getElementById('particle-container');
+            for (let i = 0; i < 5; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = (Math.random() * 200 + 100) + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * window.innerWidth + 'px';
+                particle.style.top = Math.random() * window.innerHeight + 'px';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Scroll reveal animation
+        function observeScrollElements() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('scroll-reveal');
+                        entry.target.classList.remove('scroll-hidden');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.scroll-hidden').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Copy email to clipboard
+        function copyEmail() {
+            const email = 'redmark223@gmail.com';
+            navigator.clipboard.writeText(email).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            createParticles();
+            observeScrollElements();
+        });
+
+        // Smooth scroll fallback
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
